@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns:repeat(9,11%);
+            /* margin-left: 25%;
+            margin-right: 25%; */
+            height: 360px;
+            margin-top: 75px;
+            padding: 0.5rem;
+        }
+        input{
+            height: 40px;
+            text-align:center;
+            font-size: 90%;
+
+        }
+        .h2{
+           color: purple;
+           font-family: 'Dancing Script', cursive;
+        }
+        body{
+            background-image: url(https://i.pinimg.com/736x/f8/46/1d/f8461d3dccd384777cfc2884fa507a0e.jpg);
+            background-position: fill;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+       .text{
+           display:flex;
+           flex-direction: column;
+           color: rgb(238, 238, 238);
+           padding: 0.5rem;
+           font-size: medium;
+       }
+       .tip{
+        display:flex;
+           flex-direction: column;
+           padding: 0.5rem;
+           font-size: medium;
+           color: white;
+       }
+       nav{padding: 0.5rem;}
+    </style>
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">SUDOKU<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='#helpout'>More about us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='#plas'></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            how to play?
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href='#text'>instructions</a>
+            <a class="dropdown-item" href='#tip'>tips</a>
+         
+          </div>
+        </li>
+      </ul>
+    </div>
+    <h2 class="h2">lets play</h2>
+  </nav>
+    <div id='container'>
+    </div>
+    <br><br><br>
+    <div class="text"id="text">
+    <h4>How to play Sudoku</h4>
+    <p>The goal of Sudoku is to fill in a 9×9 grid with digits so that each column, row, and 3×3 section contain the numbers between 1 to 9. At the beginning of the game, the 9×9 grid will have some of the squares filled in.
+         Your job is to use logic to fill in the missing digits and complete the grid. Don’t forget, a move is incorrect if:</p></div>
+    <div class="tip">
+        <h4>Tip to play sudoku </h4>
+        <p>Tip : Look for rows, columns of 3×3 sections that contain 5 or more numbers. Work through the remaining empty cells, trying the numbers that have not been used. In many cases, you will find numbers 
+            that can only be placed in one position considering the other numbers that are already in its row, column, and 3×3 grid.:</p></div>
+</body>
+</html>
+<script>
+    // 2d array
+var sudoku=[[],[],[],[],[],[],[],[],[]]
+
+function cretegrid() {
+
+var mycontainer = document.getElementById('container')
+console.log(mycontainer)
+
+
+// loop
+for(var i=0;i<9;i++){
+
+ console.log(i)
+//  var myinput = document.createElement('input')
+//  mycontainer.append(myinput)
+    for(var j=0;j<9;j++){
+    console.log(j,i)
+    var myinput = document.createElement('input')
+    var numero =Math.ceil(Math.random()*9)
+
+    myinput.value=numero
+    myinput.id=`${i}${j}`
+    console.log('numero:',numero,typeof(numero))
+   // myinput.value=numero
+    myinput.row=i
+    console.log(i)
+    myinput.col=j
+    // isSafe is function that check wether is num is safe to be added
+    console.log(i,"i is")
+    console.log(j, "j is")
+    console.log(numero, "number")
+    
+    if(isSafe(sudoku, i, j, numero)){
+        //add num
+        myinput.value=numero
+        myinput.readOnly=true}
+    else{
+        // keep empty
+        numero = 0
+        myinput.value=''
+    }
+    sudoku[i][j]=numero
+    mycontainer.appendChild(myinput)
+    myinput.oninput= function(e){
+        console.log('working')
+        checkAnswer(sudoku,e)
+        // isSafe(sudoku, i, j, Number(e.data))
+    }
+    }
+    
+}
+console.log('sudoku',sudoku)
+}
+cretegrid()
+// console.log(sudoku,i,j,numero)
+// day 2 agenda
+// fix repetation
+// no same num in row
+// no same num in column
+// no same num in box
+// isSafe(sudoku, i, j,number)
+function isSafe(grid, row, col, num){
+    console.log( grid)
+    // console.log("row is",row)
+    // console.log("col is",col)
+    // console.log("num is",num)
+ for(var x=0;x<9;x++){
+    //  console.log(grid, grid[row][x],num)
+    //  console.log(row)
+     if(grid[row][x]==num){
+        
+        return false
+      
+         var working = "failed"
+     
+         showcolours('red',grid[row][x])
+         
+     }
+ }   
+
+for(var y=0;y<9;y++){
+    if(grid[y][col]==num){
+        return false
+        showcolours('red',grid[y][col])
+        
+ 
+    }
+}
+var startRow = row - (row%3)
+var startCol = col - (col%3)
+for(var m=0;m<3;m++){
+    for(var n=0;n<3;n++){
+        if(grid[m+startRow][n+startCol] == num){
+            return false
+            showcolours('red',grid[m+startRow][n+startCol])
+            
+
+        }
+           
+    }
+}
+// showcolours('green',id)
+return true
+
+}
+function checkAnswer(grid,e){
+var row = e.target.row
+console.log('row',row)
+var col = e.target.col
+var num =Number(e.data)
+var id = e.target.id
+console.log('id:',id)
+if(num==''){
+    return false
+}
+else {
+  resp =   isSafe1(grid,row,col,num,id)}
+}
+function isSafe1(grid,row,col,num,id){
+ 
+    for(var x=0;x<9;x++){
+     if(grid[row][x]==num){
+     showcolours('red',id)
+         return false
+     }}
+   
+        
+     
+   
+ for(var y=0;y<9;y++){
+    if(grid[y][col]==num){
+        showcolours('red',id)
+        return false
+    }
+}
+grid[row][col] = num
+showcolours('green',id)
+return true
+}
+
+
+function showcolours(color,id){
+    var inp=document.getElementById(id)
+   
+   
+        if (color=='red'){
+            inp.style.backgroundColor = 'red'
+           
+          
+
+        }
+        else{
+            inp.style.backgroundColor='green'
+        }
+    
+}
+</script>
